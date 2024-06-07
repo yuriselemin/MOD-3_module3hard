@@ -2,31 +2,22 @@
 
 # Дополнительное практическое задание по модулю: "Подробнее о функциях."
 
+
 def structure_sum(data):
-    """
-    Функция для вычисления суммы значений в структуре данных.
-    Возвращает сумму числовых значений и длину строк. Для нашего списка данных рекурсивно применяет функцию
-    к каждому элементу.
-    """
-    def sum_or_len(x):
-        """
-        Вспомогательная функция для определения типа элемента и его обработки.
-        Возвращает значение элемента, если оно число или строка,
-        иначе рекурсивно применяет функцию к каждому элементу списка или кортежа.
-        """
-        if isinstance(x, int) or isinstance(x, float):
-            # Если элемент является числом, возвращаем его значение
-            return x
-        elif isinstance(x, str):
-            # Если элемент является строкой, возвращаем её длину
-            return len(x)
-        else:
-            # Если элемент является списком или кортежем, рекурсивно применяем функцию к каждому элементу
-            return sum(sum_or_len(y) for y in x)
-
-    # Возвращаем результат применения функции sum_or_len к входной структуре данных
-    return sum_or_len(data)
-
+    # Проверяем, является ли элемент числом или строкой
+    if isinstance(data, int) or isinstance(data, float) or isinstance(data, str):
+        return data
+    # Если элемент - список или кортеж, применяем функцию к каждому элементу
+    elif isinstance(data, list) or isinstance(data, tuple):
+        return sum(structure_sum(x) for x in data)
+    # Для словаря применяем функцию к значениям, если они числа
+    elif isinstance(data, dict):
+        return sum(structure_sum(value) for value in data.values() if isinstance(value, (int, float)))
+    # Для кортежей с пустым списком и словарем применяем функцию к элементам
+    elif data == ():
+        return structure_sum(data[0])
+    else:
+        return structure_sum(data[0]) + structure_sum(data[1])
 
 data_structure = [
     [1, 2, 3],
