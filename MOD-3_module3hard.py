@@ -28,3 +28,8 @@ data_structure = [
 ]
 result = structure_sum(data_structure)
 print(result)
+
+
+
+
+
