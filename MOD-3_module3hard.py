@@ -3,22 +3,29 @@
 # Дополнительное практическое задание по модулю: "Подробнее о функциях."
 
 
-def structure_sum(data):
-    # Проверяем, является ли элемент числом или строкой
-    if isinstance(data, int) or isinstance(data, float) or isinstance(data, str):
-        return data
-    # Если элемент - список или кортеж, применяем функцию к каждому элементу
-    elif isinstance(data, list) or isinstance(data, tuple):
-        return sum(structure_sum(x) for x in data)
-    # Для словаря применяем функцию к значениям, если они числа
-    elif isinstance(data, dict):
-        return sum(structure_sum(value) for value in data.values() if isinstance(value, (int, float)))
-    # Для кортежей с пустым списком и словарем применяем функцию к элементам
-    elif data == ():
-        return structure_sum(data[0])
-    else:
-        return structure_sum(data[0]) + structure_sum(data[1])
+def calculate_structure_sum(data_structure):
+    # Если элемент является списком, применяем рекурсивный вызов функции
+    if isinstance(data_structure, list):
+        return sum(calculate_structure_sum(item) for item in data_structure)
 
+    # Если элемент является словарем, суммируем значения, которые являются числами или строками
+    elif isinstance(data_structure, dict):
+        return sum(calculate_structure_sum(value) for value in data_structure.values() if isinstance(value, (int, str)))
+
+    # Если элемент является кортежем, применяем рекурсивный вызов функции
+    elif isinstance(data_structure, tuple):
+        return sum(calculate_structure_sum(item) for item in data_structure)
+
+    # Если элемент является строкой, возвращаем его как есть
+    elif isinstance(data_structure, str):
+        return data_structure
+
+    # Если элемент не соответствует ни одному из вышеперечисленных типов, возвращаем 0
+    else:
+        return 0
+
+
+# Пример использования функции
 data_structure = [
     [1, 2, 3],
     {'a': 4, 'b': 5},
@@ -26,9 +33,9 @@ data_structure = [
     "Hello",
     ((), [{(2, 'Urban', ('Urban2', 35))}])
 ]
-result = structure_sum(data_structure)
-print(result)
 
+result = calculate_structure_sum(data_structure)
+print(result)
 
 
 
