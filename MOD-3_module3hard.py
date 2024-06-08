@@ -3,12 +3,6 @@
 # Дополнительное практическое задание по модулю: "Подробнее о функциях."
 
 
-
-
-
-
-
-
 data_structure = [
     [1, 2, 3],
     {'a': 4, 'b': 5},
@@ -35,3 +29,8 @@ def calculate_structure_sum(list_):
 
 result = calculate_structure_sum(data_structure)
 print(result)
+
+
+
+
+
