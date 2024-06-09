@@ -11,20 +11,24 @@ data_structure = [
     ((), [{(2, 'Urban', ('Urban2', 35))}])
 ]
 
+
 def calculate_structure_sum(list_):
-    total_sum = 0
+    total_sum = 0  # Инициализация переменной для хранения суммы
+
+    # Проверка типа элемента списка
     if isinstance(list_, (int, float)):
-        return list_
+        return list_  # Если элемент является числом, возвращаем его значение
     elif isinstance(list_, str):
-        return len(list_)
+        return len(list_)  # Если элемент является строкой, возвращаем её длину
     elif isinstance(list_, (list, tuple, set)):
-        for item in list_:
-            total_sum += calculate_structure_sum(item)
+        for item in list_:  # Для каждого элемента вложенного списка/кортежа/множества
+            total_sum += calculate_structure_sum(
+                item)  # Вызываем функцию рекурсивно и добавляем результат к общей сумме
     elif isinstance(list_, dict):
-        for key, value in list_.items():
-            total_sum += calculate_structure_sum(key)
-            total_sum += calculate_structure_sum(value)
-    return total_sum
+        for key, value in list_.items():  # Для каждой пары ключ-значение в словаре
+            total_sum += calculate_structure_sum(key)  # Добавляем длину ключа к общей сумме
+            total_sum += calculate_structure_sum(value)  # Добавляем сумму значения к общей сумме
+    return total_sum  # Возвращаем общую сумму
 
 
 result = calculate_structure_sum(data_structure)
