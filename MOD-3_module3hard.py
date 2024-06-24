@@ -26,9 +26,9 @@ def calculate_structure_sum(list_):
                 item)  # Вызываем функцию рекурсивно и добавляем результат к общей сумме
     elif isinstance(list_, dict):
         for key, value in list_.items():  # Для каждой пары ключ-значение в словаре
-            total_sum += calculate_structure_sum(key)  # Добавляем длину ключа к общей сумме
-            total_sum += calculate_structure_sum(value)  # Добавляем сумму значения к общей сумме
-    return total_sum  # Возвращаем общую сумму
+            total_sum += calculate_structure_sum(key) 
+            total_sum += calculate_structure_sum(value) 
+    return total_sum
 
 
 result = calculate_structure_sum(data_structure)
